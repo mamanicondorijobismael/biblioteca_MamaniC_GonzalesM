@@ -70,11 +70,102 @@
 ```bash
 git clone https://github.com/tu-usuario/biblioteca-django.git
 cd biblioteca-django
-
-### 2. Crear y activar entorno virtual
-```bash
+  
+2. Crear y activar un entorno virtual
+bash
 python -m venv venv
-# Windows:
+# En Windows:
 venv\Scripts\activate
-# macOS/Linux:
+# En macOS / Linux:
 source venv/bin/activate
+3. Instalar dependencias
+Si tienes el archivo requirements.txt:
+
+bash
+pip install -r requirements.txt
+Si no, instala Django directamente:
+
+bash
+pip install django
+4. Aplicar migraciones
+bash
+python manage.py makemigrations
+python manage.py migrate
+5. Crear un superusuario (administrador)
+bash
+python manage.py createsuperuser
+Sigue las instrucciones en pantalla. Por ejemplo:
+
+Usuario: admin
+
+Correo: (puedes dejarlo en blanco)
+
+Contraseña: admin123
+
+6. Crear un usuario normal (para probar roles)
+Puedes hacerlo desde el panel de administración (/admin) o desde la terminal:
+
+bash
+python manage.py shell
+python
+from django.contrib.auth.models import User
+User.objects.create_user('usuario', 'usuario@mail.com', 'password123')
+exit()
+7. Ejecutar el servidor de desarrollo
+bash
+python manage.py runserver
+Abre tu navegador y visita http://127.0.0.1:8000/.
+
+🔐 Roles y permisos (detalle)
+Rol	Acciones permitidas	¿Cómo se controla?
+Anónimo (sin sesión)	Ver listados y detalles.	No se aplica ningún mixin.
+Usuario autenticado	Crear y editar registros de libros, autores y préstamos.	LoginRequiredMixin en las vistas CreateView y UpdateView.
+Administrador (is_staff)	Eliminar registros (además de crear y editar).	UserPassesTestMixin con test_func() que retorna self.request.user.is_staff.
+En las plantillas: los botones de acción se ocultan/muestran con:
+
+django
+{% if user.is_authenticated %} ... {% endif %}
+{% if user.is_staff %} ... {% endif %}
+📁 Estructura del proyecto
+text
+biblioteca-django/
+├── config/                         # Configuración del proyecto Django
+│   ├── __init__.py
+│   ├── settings.py                 # Configuración global
+│   ├── urls.py                     # URLs principales (incluye las de la app)
+│   └── wsgi.py
+├── biblioteca/                     # Aplicación principal
+│   ├── migrations/                 # Migraciones de base de datos
+│   ├── templates/
+│   │   ├── base.html               # Plantilla base con navbar y estilos
+│   │   ├── biblioteca/             # Plantillas para cada modelo
+│   │   │   ├── autor_list.html
+│   │   │   ├── autor_detail.html
+│   │   │   ├── autor_form.html
+│   │   │   ├── autor_confirm_delete.html
+│   │   │   ├── libro_list.html
+│   │   │   ├── libro_detail.html
+│   │   │   ├── libro_form.html
+│   │   │   ├── libro_confirm_delete.html
+│   │   │   ├── prestamo_list.html
+│   │   │   ├── prestamo_detail.html
+│   │   │   ├── prestamo_form.html
+│   │   │   └── prestamo_confirm_delete.html
+│   │   └── registration/
+│   │       └── login.html          # Plantilla de inicio de sesión
+│   ├── __init__.py
+│   ├── admin.py                    # Registro de modelos en el admin
+│   ├── apps.py
+│   ├── forms.py                    # ModelForms con estilos Bootstrap
+│   ├── models.py                   # Modelos: Autor, Libro, Prestamo
+│   ├── urls.py                     # Rutas específicas de la app
+│   └── views.py                    # Vistas con mixins de autorización
+├── manage.py
+├── requirements.txt                # Dependencias del proyecto
+├── .gitignore                      # Archivos ignorados por Git
+├── LICENSE                         # Licencia MIT (opcional)
+└── README.md                       # Este archivo
+🧪 Datos de prueba (opcional)
+Puedes cargar datos de prueba directamente desde el panel de administración (/admin). Inicia sesión con tu superusuario y añade autores, libros y préstamos para tener contenido con el que mostrar.
+
+
