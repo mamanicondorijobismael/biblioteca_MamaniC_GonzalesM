@@ -69,6 +69,7 @@ Sigue estas instrucciones para ejecutar el proyecto en tu máquina local.
 ```bash
 git clone https://github.com/tu-usuario/biblioteca-django.git
 cd biblioteca-django
+---
 
 2. Crear y activar un entorno virtual
 
