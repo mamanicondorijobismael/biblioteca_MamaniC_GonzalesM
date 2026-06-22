@@ -1,8 +1,3 @@
-<!--
-  README.md para Biblioteca Digital - Django
-  Incluye badges, capturas de pantalla, instrucciones detalladas.
--->
-
 # 📚 Biblioteca Digital
 
 [![Django](https://img.shields.io/badge/Django-5.0.10-green)](https://www.djangoproject.com/)
@@ -11,7 +6,8 @@
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Completado-brightgreen)]()
 
-Sistema de gestión de biblioteca desarrollado con **Django** como proyecto final de Programación Web. Incluye control de libros, autores, préstamos, autenticación de usuarios y autorización por roles.
+> Sistema de gestión de biblioteca desarrollado con **Django** como proyecto final de Programación Web.  
+> Incluye control de libros, autores, préstamos, autenticación de usuarios y autorización por roles.
 
 ---
 
@@ -46,6 +42,11 @@ Sistema de gestión de biblioteca desarrollado con **Django** como proyecto fina
   <br><em>Panel de administración de Django</em>
 </p>
 
+<p align="center">
+  <img src="screenshots/login.png" alt="Pantalla de login" width="70%">
+  <br><em>Pantalla de inicio de sesión</em>
+</p>
+
 > 📸 *Nota: Agrega tus propias capturas en la carpeta `screenshots/`.*
 
 ---
@@ -69,3 +70,11 @@ Sistema de gestión de biblioteca desarrollado con **Django** como proyecto fina
 ```bash
 git clone https://github.com/tu-usuario/biblioteca-django.git
 cd biblioteca-django
+
+### 2. Crear y activar entorno virtual
+```bash
+python -m venv venv
+# Windows:
+venv\Scripts\activate
+# macOS/Linux:
+source venv/bin/activate
