@@ -184,7 +184,7 @@ biblioteca-django/
 
 ---
 
-## 📝 Fundamentación Técnica (Defensa de Proyecto)
+## 📝 Fundamentación Técnica
 
 * **Persistencia y Abstracción:** El modelo cuenta con tres entidades correlacionadas (`Autor`, `Libro`, `Prestamo`). Se anula la exposición de ID numéricos secuenciales sobreescribiendo el ciclo de vida en el método `save()` mediante la generación de slugs amigables para las URLs.
 * **Controladores Avanzados:** La lógica de negocio fue desarrollada mediante Vistas Basadas en Clases (`CBV`), optimizando la reutilización de código y acelerando el tiempo de desarrollo del CRUD.
