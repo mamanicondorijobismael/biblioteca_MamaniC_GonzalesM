@@ -197,5 +197,7 @@ biblioteca-django/
 ---
 <div align="center">
   Gonzales Moscoso Roberto Carlos
+
+  
   Mamani Condori Job Ismael
 </div>
