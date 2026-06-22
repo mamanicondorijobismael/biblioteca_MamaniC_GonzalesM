@@ -191,11 +191,6 @@ biblioteca-django/
 
 ---
 <div align="center">
-  Desarrollado con ❤️ para la materia de Programación Web.
-</div>
-
----
-<div align="center">
   Gonzales Moscoso Roberto Carlos
 
   
