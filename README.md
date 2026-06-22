@@ -71,13 +71,16 @@
 git clone https://github.com/tu-usuario/biblioteca-django.git
 cd biblioteca-django
   
-2. Crear y activar un entorno virtual
-bash
+### 2. Crear y activar un entorno virtual
+
+```bash
 python -m venv venv
 # En Windows:
 venv\Scripts\activate
 # En macOS / Linux:
 source venv/bin/activate
+
+
 3. Instalar dependencias
 Si tienes el archivo requirements.txt:
 
