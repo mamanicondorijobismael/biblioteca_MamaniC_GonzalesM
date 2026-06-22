@@ -1,6 +1,6 @@
-markdown<div align="center">
+<div align="center">
   
-  # 📚 Biblioteca Digital
+  # 📚 Biblioteca 
   ### *Sistema de Gestión con Django para la asignatura de Programación Web*
 
   [![Django](https://shields.io)](https://djangoproject.com)
@@ -18,7 +18,6 @@ markdown<div align="center">
 
 ## 🗺️ Menú de Navegación rápida
 * [✨ Características Principales](#-características-principales)
-* [🖥️ Vista Previa del Sistema](#️-vista-previa-del-sistema)
 * [🛠️ Ficha Técnica](#️-ficha-técnica)
 * [📦 Guía de Instalación](#-guía-de-instalación-y-configuración)
 * [🔐 Matriz de Seguridad](#-matriz-de-seguridad-y-permisos)
@@ -37,22 +36,6 @@ markdown<div align="center">
     * `Administrador (is_staff):` Control total del sistema, incluyendo la eliminación de datos.
 * 🔍 **Optimización SEO & UX:** Enrutamiento semántico mediante la generación automática de *slugs*.
 * 🎨 **Diseño Vanguardista:** Interfaz responsiva basada en Bootstrap 5 con la implementación de un tema oscuro personalizado.
-
----
-
-## 🖥️ Vista Previa del Sistema
-
-> 💡 **Nota para el despliegue:** Asegúrate de almacenar tus capturas dentro del directorio `screenshots/` local para asegurar su correcta vinculación. Puedes usar un GIF animado en esta sección para simular el uso en tiempo real.
-
-| 📋 Lista de Libros | ➕ Formulario Operativo |
-|:---:|:---:|
-| ![Lista de libros](screenshots/libro_list.png) | ![Formulario de libro](screenshots/libro_form.png) |
-| *Botonera dinámica adaptada al rol* | *Validación de campos en tiempo real* |
-
-| 👑 Panel de Administración | 🔐 Control de Acceso |
-|:---:|:---:|
-| ![Panel de administración](screenshots/admin.png) | ![Login](screenshots/login.png) |
-| *Backoffice nativo para la gestión de datos* | *Diseño minimalista y seguro* |
 
 ---
 
@@ -209,4 +192,10 @@ biblioteca-django/
 ---
 <div align="center">
   Desarrollado con ❤️ para la materia de Programación Web.
+</div>
+
+---
+<div align="center">
+  Gonzales Moscoso Roberto Carlos
+  Mamani Condori Job Ismael
 </div>
