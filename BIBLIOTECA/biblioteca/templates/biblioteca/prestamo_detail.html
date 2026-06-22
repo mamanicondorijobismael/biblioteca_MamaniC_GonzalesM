@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card-custom">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="mb-0 text-white"><i class="bi bi-arrow-left-right"></i> Detalle del Préstamo</h4>
+                {% if prestamo.devuelto %}
+                    <span class="badge-devuelto"><i class="bi bi-check-circle"></i> Devuelto</span>
+                {% else %}
+                    <span class="badge-pendiente"><i class="bi bi-clock"></i> Pendiente</span>
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <div class="detail-row">
+                    <div class="detail-label"><i class="bi bi-journal-bookmark me-2"></i>Libro:</div>
+                    <div class="detail-value"><a href="{% url 'biblioteca:libro_detail' prestamo.libro.slug %}" class="text-decoration-none" style="color: var(--accent-primary);">{{ prestamo.libro.titulo }}</a></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label"><i class="bi bi-person me-2"></i>Usuario:</div>
+                    <div class="detail-value">{{ prestamo.usuario.username }}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label"><i class="bi bi-calendar-event me-2"></i>Fecha de préstamo:</div>
+                    <div class="detail-value">{{ prestamo.fecha_prestamo }}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label"><i class="bi bi-calendar-check me-2"></i>Fecha de devolución:</div>
+                    <div class="detail-value">{{ prestamo.fecha_devolucion|default:"—" }}</div>
+                </div>
+
+                <div class="d-flex gap-2 mt-5">
+                    <a href="{% url 'biblioteca:prestamo_list' %}" class="btn btn-secondary-custom">
+                        <i class="bi bi-arrow-left"></i> Volver
+                    </a>
+                    <div class="ms-auto d-flex gap-2">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'biblioteca:prestamo_update' prestamo.pk %}" class="btn btn-warning-custom d-flex align-items-center">
+                                <i class="bi bi-pencil me-1"></i> Editar
+                            </a>
+                            <button onclick="confirmDelete('{% url 'biblioteca:prestamo_delete' prestamo.pk %}', '¿Estás seguro de que deseas eliminar este préstamo de <strong>{{ prestamo.libro.titulo }}</strong>?')" class="btn btn-danger-custom d-flex align-items-center">
+                                <i class="bi bi-trash me-1"></i> Eliminar
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

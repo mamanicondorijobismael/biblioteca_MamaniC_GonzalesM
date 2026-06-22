@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="section-header">
+    <div>
+        <h1 class="section-title"><i class="bi bi-arrow-left-right"></i> Lista de Préstamos</h1>
+        <span class="counter-badge">{{ prestamos|length }} registrados</span>
+    </div>
+    {% if user.is_authenticated %}
+        <a href="{% url 'biblioteca:prestamo_create' %}" class="btn btn-primary-custom">
+            <i class="bi bi-plus-circle"></i> Registrar Préstamo
+        </a>
+    {% endif %}
+</div>
+
+<table class="table table-custom">
+    <thead>
+        <tr>
+            <th>Libro</th>
+            <th>Usuario</th>
+            <th>Fecha Préstamo</th>
+            <th>Fecha Devolución</th>
+            <th>Devuelto</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prestamo in prestamos %}
+        <tr>
+            <td>
+                <strong>{{ prestamo.libro.titulo }}</strong>
+            </td>
+            <td><i class="bi bi-person me-1"></i>{{ prestamo.usuario.username }}</td>
+            <td>{{ prestamo.fecha_prestamo }}</td>
+            <td>{{ prestamo.fecha_devolucion|default:"Pendiente" }}</td>
+            <td>
+                {% if prestamo.devuelto %}
+                    <span class="badge-devuelto"><i class="bi bi-check-circle"></i> Sí</span>
+                {% else %}
+                    <span class="badge-pendiente"><i class="bi bi-clock"></i> No</span>
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url 'biblioteca:prestamo_detail' prestamo.pk %}" class="btn btn-info-custom btn-sm">
+                    <i class="bi bi-eye"></i> Ver
+                </a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'biblioteca:prestamo_update' prestamo.pk %}" class="btn btn-warning-custom btn-sm">
+                        <i class="bi bi-pencil"></i> Editar
+                    </a>
+                    <button onclick="confirmDelete('{% url 'biblioteca:prestamo_delete' prestamo.pk %}', '¿Estás seguro de que deseas eliminar este préstamo de <strong>{{ prestamo.libro.titulo }}</strong>?')" class="btn btn-danger-custom btn-sm">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" class="text-center py-4" style="color: var(--text-secondary);">
+                <i class="bi bi-inbox" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></i>
+                No hay préstamos registrados.
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

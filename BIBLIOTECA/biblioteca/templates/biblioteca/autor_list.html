@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="section-header">
+    <div>
+        <h1 class="section-title"><i class="bi bi-people"></i> Autores</h1>
+        <span class="counter-badge">{{ autores|length }} registrados</span>
+    </div>
+    {% if user.is_authenticated %}
+        <a href="{% url 'biblioteca:autor_create' %}" class="btn btn-primary-custom">
+            <i class="bi bi-plus-circle"></i> Nuevo Autor
+        </a>
+    {% endif %}
+</div>
+
+<table class="table table-custom">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Libros</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for autor in autores %}
+        <tr>
+            <td><strong>{{ autor.nombre }}</strong></td>
+            <td>{{ autor.apellido }}</td>
+            <td>
+                {% if autor.fecha_nacimiento %}
+                    {{ autor.fecha_nacimiento }}
+                {% else %}
+                    <span style="color: var(--text-secondary);">—</span>
+                {% endif %}
+            </td>
+            <td>
+                <span class="counter-badge">{{ autor.libros.count }}</span>
+            </td>
+            <td>
+                <a href="{% url 'biblioteca:autor_detail' autor.slug %}" class="btn btn-info-custom btn-sm">
+                    <i class="bi bi-eye"></i> Ver
+                </a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'biblioteca:autor_update' autor.slug %}" class="btn btn-warning-custom btn-sm">
+                        <i class="bi bi-pencil"></i> Editar
+                    </a>
+                    <button onclick="confirmDelete('{% url 'biblioteca:autor_delete' autor.slug %}', '¿Estás seguro de que deseas eliminar a <strong>{{ autor.nombre }} {{ autor.apellido }}</strong>?')" class="btn btn-danger-custom btn-sm">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="text-center py-4" style="color: var(--text-secondary);">
+                <i class="bi bi-inbox" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></i>
+                No hay autores registrados.
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

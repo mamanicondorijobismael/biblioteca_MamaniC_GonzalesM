@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="section-header">
+    <div>
+        <h1 class="section-title"><i class="bi bi-journal-bookmark"></i> Libros</h1>
+        <span class="counter-badge">{{ libros|length }} registrados</span>
+    </div>
+    {% if user.is_authenticated %}
+        <a href="{% url 'biblioteca:libro_create' %}" class="btn btn-primary-custom">
+            <i class="bi bi-plus-circle"></i> Nuevo Libro
+        </a>
+    {% endif %}
+</div>
+
+<table class="table table-custom">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>ISBN</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for libro in libros %}
+        <tr>
+            <td>
+                <strong>{{ libro.titulo }}</strong>
+            </td>
+            <td>{{ libro.autor }}</td>
+            <td><code style="color: var(--accent-primary);">{{ libro.isbn }}</code></td>
+            <td>
+                {% if libro.disponible %}
+                    <span class="badge-disponible"><i class="bi bi-check-circle"></i> Disponible</span>
+                {% else %}
+                    <span class="badge-no-disponible"><i class="bi bi-x-circle"></i> No disponible</span>
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url 'biblioteca:libro_detail' libro.slug %}" class="btn btn-info-custom btn-sm">
+                    <i class="bi bi-eye"></i> Ver
+                </a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'biblioteca:libro_update' libro.slug %}" class="btn btn-warning-custom btn-sm">
+                        <i class="bi bi-pencil"></i> Editar
+                    </a>
+                    <button onclick="confirmDelete('{% url 'biblioteca:libro_delete' libro.slug %}', '¿Estás seguro de que deseas eliminar el libro <strong>{{ libro.titulo }}</strong>?')" class="btn btn-danger-custom btn-sm">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="text-center py-4" style="color: var(--text-secondary);">
+                <i class="bi bi-inbox" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></i>
+                No hay libros registrados.
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
