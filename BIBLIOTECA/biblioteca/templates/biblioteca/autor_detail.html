@@ -40,6 +40,8 @@
                             <a href="{% url 'biblioteca:autor_update' autor.slug %}" class="btn btn-warning-custom d-flex align-items-center">
                                 <i class="bi bi-pencil me-1"></i> Editar
                             </a>
+                        {% endif %}
+                        {% if user.is_superuser %}
                             <button onclick="confirmDelete('{% url 'biblioteca:autor_delete' autor.slug %}', '¿Estás seguro de que deseas eliminar a <strong>{{ autor.nombre }} {{ autor.apellido }}</strong>?')" class="btn btn-danger-custom d-flex align-items-center">
                                 <i class="bi bi-trash me-1"></i> Eliminar
                             </button>

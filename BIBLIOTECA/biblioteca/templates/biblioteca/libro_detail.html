@@ -37,6 +37,8 @@
                             <a href="{% url 'biblioteca:libro_update' libro.slug %}" class="btn btn-warning-custom d-flex align-items-center">
                                 <i class="bi bi-pencil me-1"></i> Editar
                             </a>
+                        {% endif %}
+                        {% if user.is_superuser %}
                             <button onclick="confirmDelete('{% url 'biblioteca:libro_delete' libro.slug %}', '¿Estás seguro de que deseas eliminar <strong>{{ libro.titulo }}</strong>?')" class="btn btn-danger-custom d-flex align-items-center">
                                 <i class="bi bi-trash me-1"></i> Eliminar
                             </button>

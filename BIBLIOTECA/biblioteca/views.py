@@ -4,6 +4,13 @@ from django.urls import reverse_lazy
 from .models import Autor, Libro, Prestamo
 from .forms import Autorform, Libroform, Prestamoform
 
+
+class SuperuserRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
+    """Solo permite acceso a superusuarios. Retorna 403 si no es superusuario."""
+    def test_func(self):
+        return self.request.user.is_superuser
+
+
 class AutorListView(ListView):
     model = Autor
     template_name = 'biblioteca/autor_list.html'
@@ -26,7 +33,7 @@ class AutorUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'biblioteca/autor_form.html'
     success_url = reverse_lazy('biblioteca:autor_list')
     
-class AutorDeleteView(LoginRequiredMixin, DeleteView):
+class AutorDeleteView(SuperuserRequiredMixin, DeleteView):
     model = Autor
     template_name = 'biblioteca/autor_confirm_delete.html'
     success_url = reverse_lazy('biblioteca:autor_list')
@@ -53,7 +60,7 @@ class LibroUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'biblioteca/libro_form.html'
     success_url = reverse_lazy('biblioteca:libro_list')
     
-class LibroDeleteView(LoginRequiredMixin, DeleteView):
+class LibroDeleteView(SuperuserRequiredMixin, DeleteView):
     model = Libro
     template_name = 'biblioteca/libro_confirm_delete.html'
     success_url = reverse_lazy('biblioteca:libro_list')
@@ -80,7 +87,7 @@ class PrestamoUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'biblioteca/prestamo_form.html'
     success_url = reverse_lazy('biblioteca:prestamo_list')
     
-class PrestamoDeleteView(LoginRequiredMixin, DeleteView):
+class PrestamoDeleteView(SuperuserRequiredMixin, DeleteView):
     model = Prestamo
     template_name = 'biblioteca/prestamo_confirm_delete.html'
     success_url = reverse_lazy('biblioteca:prestamo_list')

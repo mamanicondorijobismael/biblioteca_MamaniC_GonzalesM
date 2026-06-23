@@ -39,6 +39,8 @@
                             <a href="{% url 'biblioteca:prestamo_update' prestamo.pk %}" class="btn btn-warning-custom d-flex align-items-center">
                                 <i class="bi bi-pencil me-1"></i> Editar
                             </a>
+                        {% endif %}
+                        {% if user.is_superuser %}
                             <button onclick="confirmDelete('{% url 'biblioteca:prestamo_delete' prestamo.pk %}', '¿Estás seguro de que deseas eliminar este préstamo de <strong>{{ prestamo.libro.titulo }}</strong>?')" class="btn btn-danger-custom d-flex align-items-center">
                                 <i class="bi bi-trash me-1"></i> Eliminar
                             </button>
