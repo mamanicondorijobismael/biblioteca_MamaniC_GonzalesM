@@ -33,4 +33,5 @@ python manage.py runserver
 
 ## Autor
 Mamani Condori Job Ismael
+
 Gonzales Moscoso Roberto Carlos
